@@ -4,7 +4,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
-import pug from 'pug';
+import { localsMiddleware } from './middlewares';
 
 // routers
 import routes from './routes';
@@ -14,13 +14,16 @@ import videoRouter from './routers/videoRouter';
 
 const app = express();
 
+app.use(helmet());
 app.set('view engine', 'pug');
 // use middleware
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded( {extended : true} ));
-app.use(helmet());
 app.use(morgan("dev"));
+
+// 템플릿에 변수를 전달하기 위한 미들웨어.. local을 활용해 변수 접근
+app.use(localsMiddleware);
 
 // app.use("/", globalRouter);
 app.use(routes.home, globalRouter);

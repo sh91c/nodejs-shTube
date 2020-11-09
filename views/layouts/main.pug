@@ -1,11 +1,10 @@
 doctype html
 html
   head
-    title | shTube
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.5.0/css/all.css")
+    title #{pageTitle} | #{siteName}
   body
-    header
-      h1 shTube
+    include ../partials/header
     main
       block content
-    footer
-      span &copy; shTube
+    include ../partials/footer
