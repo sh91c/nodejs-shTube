@@ -1,0 +1,25 @@
+{
+  "name": "nodejs-shtube",
+  "version": "1.0.0",
+  "description": "Cloning Youtube with nodejs",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sh91c/nodejs-shTube.git"
+  },
+  "author": "sh91c",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sh91c/nodejs-shTube/issues"
+  },
+  "homepage": "https://github.com/sh91c/nodejs-shTube#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
