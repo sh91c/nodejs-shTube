@@ -3,7 +3,7 @@ import Video from '../models/Video';
 
 export const home = async (req, res) => {
   try {
-    const videos = await Video.find({}); // 모든 비디오 Select
+    const videos = await Video.find({}).sort({_id: -1 }); // 모든 비디오 Select
     res.render('home', { pageTitle : 'Video', videos });
   } catch (error) {
     console.log(error);
@@ -11,9 +11,18 @@ export const home = async (req, res) => {
   }
 };
 // render의 첫 번째 인자는 뷰(템플릿), 두 번째 인자로 데이터 전달 가능
-export const search = (req, res) => {
+export const search = async (req, res) => {
   // const searchingBy = req.query.term; -> 구조 분해 할당으로 작성해보자
   const { query : { term : searchingBy }} = req; // term : 이름 할당 가능
+  let videos = [];
+  try {
+    videos = await Video.find({
+      // $regex : 정규표현식, searchingBy 단어를 포함한, $option: i : 대소문자 구분 X
+      title : { $regex : searchingBy, $options: 'i' },
+    });
+  } catch (error) {
+    console.log(error);
+  }
   res.render('search', { pageTitle : 'Search' , searchingBy, videos }); // 현재 비디오 검색은 구현하지 않았음
 };
 
@@ -22,7 +31,7 @@ export const postUpload = async (req, res) => {
   // 비디오 업로드 및 저장 하기
   const {
     body : { title, description },
-    file : { path } // 업로드된 비디오의 경로
+    file : { path }, // 업로드된 비디오의 경로
   } = req;
 
   try {
@@ -71,16 +80,16 @@ export const postEditVideo = async (req, res) => {
   } catch (error) {
     res.redirect(routes.home);
   }
-}
+};
 
 // 비디오 게시글 삭제
 export const deleteVideo = async (req, res) => {
   const { params : { id } } = req;
-  try{
+  try {
     await Video.findByIdAndDelete({ _id : id });
     // fs.unlink 구현 예정
     res.redirect(routes.home);
   } catch (error) {
-    res.redirect(routes.home)
+    res.redirect(routes.home);
   }
-}
+};

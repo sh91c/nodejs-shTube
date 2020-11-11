@@ -5,9 +5,12 @@ block content
   .search__header
     h3 검색 결과 : #{searchingBy}
   .search__videos
+    if videos.length === 0
+      h5 No Videos found..
     each video in videos
       +videoBlock({
-        videoFile : video.videoFile,
+        videoFile : video.fileUrl,
         title : video.title,
         views : video.views,
+        id : video.id, 
       })
