@@ -1,4 +1,10 @@
 import app from './app';
+import './db';
+import dotenv from 'dotenv';
+import './models/Video';
+import './models/Comment';
+
+dotenv.config();
 
 app.set('port', process.env.PORT || 9090);
 

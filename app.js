@@ -21,6 +21,7 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded( {extended : true} ));
 app.use(morgan("dev"));
+app.use('/uploads', express.static('uploads'));
 
 // 템플릿에 변수를 전달하기 위한 미들웨어.. local을 활용해 변수 접근
 app.use(localsMiddleware);
