@@ -20,5 +20,7 @@ module.exports = {
     'object-curly-spacing': 'off',
     'comma-spacing': 'off',
     'eol-last': 'off',
+    'comma-dangle': 'off',
+    'space-before-blocks': 'off',
   },
 };
