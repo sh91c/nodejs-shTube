@@ -10,8 +10,17 @@ const OUTPUT_DIR = path.join(__dirname, 'static');
 const config = {
   entry : ENTRY_FILE,
   mode : MODE,
+  devtool: 'cheap-module-source-map', //Uncaught EvalError 해결
   module: {
     rules : [
+      {
+        test: /\.(js)$/,
+        use: [
+          {
+            loader: 'babel-loader'
+          }
+        ]
+      },
       {
         test: /\.(scss)$/,
         use: [
@@ -49,7 +58,7 @@ const config = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css'
+      filename: 'styles.css'
     }),
   ]
 };

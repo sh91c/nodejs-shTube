@@ -22,5 +22,7 @@ module.exports = {
     'eol-last': 'off',
     'comma-dangle': 'off',
     'space-before-blocks': 'off',
+    'space-in-parens': 'off',
+    'indent': 'off',
   },
 };

@@ -1,0 +1,1 @@
+{"version":3,"file":"styles.css","sources":["webpack:///assets/scss/styles.scss"],"sourcesContent":["@import 'config/_variables.scss';\n\nbody {\n  background-color: $bgColor;\n}"],"mappings":"AAEA;AACA;;","sourceRoot":""}
