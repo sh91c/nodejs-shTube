@@ -6,7 +6,7 @@ const multerVideo = multer({ dest: 'uploads/videos/'});
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = 'shTube'; // pug에서 js 변수 할당이 가능해짐 
   res.locals.routes = routes;     // a(href=routes.join) 같이..
-  res.locals.user = req.user || null;
+  res.locals.loggedUser = req.user || null;
   // res.locals.user = {
   //   isAuthenticated : false,
   //   id : 1,
