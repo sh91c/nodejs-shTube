@@ -24,5 +24,6 @@ module.exports = {
     'space-before-blocks': 'off',
     'space-in-parens': 'off',
     'indent': 'off',
+    'max-len': 'off',
   },
 };
