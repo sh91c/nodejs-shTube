@@ -1,0 +1,8 @@
+.home-videos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(360px, 1fr));
+  grid-gap: 30px;
+    .videoBlcok{
+      grid-column: 3;
+    }
+}
