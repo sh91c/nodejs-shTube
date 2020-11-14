@@ -78,12 +78,12 @@ export const getMe = (req, res) => {
 export const userDetail = async (req, res) => {
   const { params : { id } } = req;
   try {
-    const user = await User.findById(id);
+    const user = await User.findById(id).populate('videos');
     res.render('userDetail', { pageTitle : 'User Detail', user });
   } catch (error) {
     res.redirect(routes.home);
   }
-}
+};
 
 export const getEditProfile = (req, res) => res.render('editProfile', { pageTitle : 'Edit Profile' });
 export const postEditProfile = async (req, res) => {

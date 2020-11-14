@@ -9,6 +9,7 @@ const globalRouter = express.Router();
 
 globalRouter.get(routes.home, home);
 globalRouter.get(routes.search, search);
+globalRouter.get(routes.me, getMe);
 
 globalRouter.get(routes.join, onlyPublic, getJoin);
 globalRouter.post(routes.join, onlyPublic, postJoin, postLogin); // 회원가입 후 자동 로그인
@@ -33,6 +34,5 @@ globalRouter.get(
 //   postFacebookLogin
 // );
 
-globalRouter.get(routes.me, getMe);
 
 export default globalRouter;

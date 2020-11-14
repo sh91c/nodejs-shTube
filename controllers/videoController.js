@@ -39,12 +39,13 @@ export const postUpload = async (req, res) => {
       fileUrl : path,
       title,
       description,
+      creator : req.user.id
     });
-    console.log(newVideo);
+    req.user.videos.push(newVideo.id);
+    req.user.save();
     res.redirect(routes.videoDetail(newVideo.id)); // <- 해당 업로드된 비디오 디테일 페이지로
   } catch (error) {
     console.log(error);
-    // res.render('')
   }
 };
 
@@ -52,7 +53,7 @@ export const postUpload = async (req, res) => {
 export const videoDetail = async (req, res) => {
   const { params : { id } } = req;
   try {
-    const video = await Video.findById(id);
+    const video = await Video.findById(id).populate('creator');
     res.render('videoDetail', { pageTitle : video.title, video });
   } catch (error) {
     res.redirect(routes.home);
@@ -64,7 +65,11 @@ export const getEditVideo = async (req, res) => {
   const { params : { id } } = req;
   try {
     const video = await Video.findById(id);
+    if (video.creator !== req.user.id) { // /:id/edit으로 요청시 업로더와 현재 로그인된 유저와 일치하지 않으면 수정하지 못하게..
+      throw Error();
+    } else {
     res.render('editVideo', { pageTitle : `Edit ${video.title}`, video });
+    }
   } catch (error) {
     res.redirect(routes.home);
   }
@@ -86,9 +91,13 @@ export const postEditVideo = async (req, res) => {
 export const deleteVideo = async (req, res) => {
   const { params : { id } } = req;
   try {
-    await Video.findByIdAndDelete({ _id : id });
-    // fs.unlink 구현 예정
-    res.redirect(routes.home);
+    const video = await Video.findById(id);
+    if (video.creator !== req.user.id) {
+      throw Error();
+    } else {
+      await Video.findByIdAndDelete({ _id : id });
+      res.redirect(routes.home);
+    }
   } catch (error) {
     res.redirect(routes.home);
   }
