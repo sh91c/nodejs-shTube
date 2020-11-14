@@ -2,6 +2,7 @@ import multer from 'multer';
 import routes from './routes';
 
 const multerVideo = multer({ dest: 'uploads/videos/'});
+const multerAvatar = multer({ dest: 'uploads/avatars/'});
 
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = 'shTube'; // pug에서 js 변수 할당이 가능해짐 
@@ -35,3 +36,4 @@ export const onlyPrivate = (req, res, next) => {
 
 export const uploadVideo = multerVideo.single('videoFile');
   // single : 업로드 개수 1개, videoFile : upload.pug의 input file의 name 속성
+export const uploadAvatar = multerAvatar.single('avatar');
