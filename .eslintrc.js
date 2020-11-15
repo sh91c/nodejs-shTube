@@ -26,4 +26,7 @@ module.exports = {
     'indent': 'off',
     'max-len': 'off',
   },
+  env: {
+    browser: true
+  }
 };
