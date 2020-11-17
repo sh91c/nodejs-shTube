@@ -17,6 +17,7 @@ import routes from './routes';
 import globalRouter from './routers/globalRouter';
 import userRouter from './routers/userRouter';
 import videoRouter from './routers/videoRouter';
+import apiRouter from './routers/apiRouter';
 
 const app = express();
 
@@ -48,6 +49,20 @@ app.use(localsMiddleware);
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
 app.use(routes.videos, videoRouter);
+app.use(routes.api, apiRouter);
+
+// // 404 처리
+// app.use((req, res, next)=> {
+//   const error = new Error(`${req.method} ${req.url} Not found.`);
+//   error.status = 404;
+//   next(error);
+// });
+// // error 처리
+// app.use((err, req, res, next) => {
+//   res.locals.message = err.message;
+//   res.locals.error = process.env.NODE_ENV !== 'production' ? err : {};
+//   res.redirect(routes.home);
+// });
 
 export default app;
   // module.exports = app;
