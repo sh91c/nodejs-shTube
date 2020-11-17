@@ -1,16 +1,37 @@
 extends layouts/main
-include mixins/videoBlock
+include mixins/searchVideoBlock
 
 block content
   .search__header
-    h3 검색 결과 : #{searchingBy}
+    .search__header-title
+      span.search__term #{searchingBy}
+      span.search__result (으)로 검색한 결과입니다.
   .search__videos
     if videos.length === 0
-      h5 No Videos found..
+      .no-result
+        //- .no-result__image
+        //-   img(src="../../static/images/404.png")
+        span.no-result__text 검색결과가 없습니다.
+        span.no-result__subtext 다른 검색어로 입력하시겠어요?
+
     each video in videos
       +videoBlock({
-        videoFile : video.fileUrl,
-        title : video.title,
-        views : video.views,
-        id : video.id, 
+        id: video.id,
+        title: video.title,
+        creator: video.creator.name,
+        views: video.views,
+        videoFile: video.fileUrl,
+        createdAt: video.createdAt.toDateString()
       })
+  //- .search__header
+  //-   h3 검색 결과 : #{searchingBy}
+  //- .search__videos
+  //-   if videos.length === 0
+  //-     h5 No Videos found..
+  //-   each video in videos
+  //-     +videoBlock({
+  //-       videoFile : video.fileUrl,
+  //-       title : video.title,
+  //-       views : video.views,
+  //-       id : video.id, 
+  //-     })
