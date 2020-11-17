@@ -7,7 +7,7 @@
     "dev:server": "nodemon --exec babel-node init.js --ignore 'scss' --ignore 'static'",
     "dev:assets": "WEBPACK_ENV=development webpack -w",
     "build:assets": "WEBPACK_ENV=production webpack",
-    "build:server": "build --ignore 'assets','static','webpack.config.js'",
+    "build:server": "babel src --out-dir build --ignore 'assets','static','webpack.config.js'",
     "copyAll": "cp -R static build && cp -R views build",
     "build": "npm run build:server && npm run build:assets && npm run copyAll",
     "prebuild": "rm -rf build",
