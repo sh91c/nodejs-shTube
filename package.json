@@ -7,7 +7,8 @@
     "start": "node init.js",
     "dev:server": "nodemon --exec babel-node init.js --ignore 'scss' --ignore 'static'",
     "dev:assets": "WEBPACK_ENV=development webpack -w",
-    "build:assets": "WEBPACK_ENV=production webpack"
+    "build:assets": "WEBPACK_ENV=production webpack",
+    "postinstall": "bower install"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,7 @@
     "axios": "^0.18.0",
     "babel-loader": "^8.2.1",
     "body-parser": "^1.19.0",
+    "bower": "^1.8.8",
     "connect-mongo": "^2.0.1",
     "cookie-parser": "^1.4.5",
     "css-loader": "^4.3.0",
