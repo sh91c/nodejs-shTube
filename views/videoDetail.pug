@@ -7,21 +7,41 @@ block content
       src:video.fileUrl
     })
     .video__info
-      if loggedUser
-        if video.creator.id === loggedUser.id
-          a(href=routes.editVideo(video.id))
-            button Edit Video
-      h5.video__title=video.title
-      p.video__description=video.description
+      .video__title_container
+        h5.video__title=video.title
+        .testbox
+        if loggedUser
+          if video.creator.id === loggedUser.id
+            a(href=`${routes.editVideo(video.id)}`)
+              button 수 정
       if video.views === 1
         span.video__views 1 view
       else
-        span.video__views #{video.views} views
-      .video__author
-        |Uploaded by 
-        a(href=routes.userDetail(video.creator.id))=video.creator.name
-    .video__comments
-      if video.comments.length === 1
-        span.video__comment-number 1 comment
-      else
-        span.video__comment-number #{video.comments.length} comments
+        span.video__views #{video.views+1} views
+          .video__author
+            |Uploaded by 
+            a(href=routes.userDetail(video.creator.id))=video.creator.name
+      hr
+      p.video__description=video.description
+      hr
+      .video__comments
+        if video.comments.length === 1
+          span.video__comment-number 댓글
+            span#jsCommentNumber &nbsp;1
+            |개
+        else
+          span.video__comment-number 댓글 
+            span#jsCommentNumber=video.comments.length
+            |개
+        form.add__comment#jsAddComment
+          if !loggedUser
+            input.input-text(type='text', placeholder='로그인을 하시고 댓글을 작성하세요...')
+          else
+            input.input-text(type='text', placeholder='댓글 추가...')
+          if loggedUser
+            input.input-author(type='hidden' value=loggedUser.name)
+        ul.video__comments-list#jsCommentList
+          each comment in video.comments.reverse()
+            li
+              h6.comment-author=comment.name
+              span.comment-text=comment.text
