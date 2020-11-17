@@ -4,12 +4,12 @@
   "description": "Cloning Youtube with nodejs",
   "main": "init.js",
   "scripts": {
-    "start": "node init.js",
     "dev:server": "nodemon --exec babel-node init.js --ignore 'scss' --ignore 'static'",
     "dev:assets": "WEBPACK_ENV=development webpack -w",
     "build:assets": "WEBPACK_ENV=production webpack",
-    "prebuild": "rm -rf build",
     "build": "npm run build:server && npm run build:assets && npm run copyAll",
+    "prebuild": "rm -rf build",
+    "start": "node init.js",
     "prestart": "npm run build"
   },
   "repository": {
