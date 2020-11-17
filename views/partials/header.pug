@@ -10,14 +10,17 @@ header.header
       ul
         if !loggedUser
           li
-            a(href=routes.join) Join
+            a(href=routes.join) 회원가입
           li
-            a(href=routes.login) LogIn
+            a(href=routes.login) 로그인
         else
           li
-            a(href=`/videos${routes.upload}`) Upload Video
+            a(href=`/videos${routes.upload}`)
+              i.fas.fa-video
           li
             //- a(href=routes.userDetail(user.id)) Profile
-            a(href=routes.me) Profile
+            a(href=routes.me)
+              i.fas.fa-user-circle
           li
-            a(href=routes.logout) Logout
+            a(href=routes.logout) 
+              i.fas.fa-sign-out-alt
