@@ -1,0 +1,12 @@
+mixin videoBlock(video = {})
+    .videoBlock
+        a.videoBlock__thumbnail-box(href=routes.videoDetail(video.id))
+            video.videoBlock__thumbnail(src=video.videoFile, controls=false)
+        .videoInfoBox
+            a(href=routes.videoDetail(video.id))
+                span.videoBlock__title=video.title
+            span.videoBlock__creator=video.creator
+            .videoSubInfo
+                br
+                span.videoBlock__views 조회수 #{video.views}회
+                span.videoBlock__date ∙ #{video.createdAt}
