@@ -8,6 +8,7 @@ import passport from 'passport';
 import mongoose from 'mongoose';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
+import path from 'path';
 
 import './passport';
 import { localsMiddleware } from './middlewares';
@@ -25,6 +26,7 @@ const CookieStore = MongoStore(session);
 
 app.use(helmet({ contentSecurityPolicy: false }));
 app.set('view engine', 'pug');
+app.set("views", path.join(__dirname, "views"));
 // use middleware
 app.use(cookieParser());
 app.use(bodyParser.json());
