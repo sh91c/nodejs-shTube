@@ -9,7 +9,8 @@
     "dev:assets": "WEBPACK_ENV=development webpack -w",
     "build:assets": "WEBPACK_ENV=production webpack",
     "build": "npm run build:server && npm run build:assets && npm run copyAll",
-    "prestart": "npm run build"
+    "prestart": "npm run build",
+    "prebuild": "rm -rf build"
   },
   "repository": {
     "type": "git",
