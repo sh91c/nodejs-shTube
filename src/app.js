@@ -1,3 +1,4 @@
+
 import express from 'express'; // 바벨 사용시 ES6모듈 import/export 사용가능
   // const express = require('express');
 import morgan from 'morgan';
@@ -26,14 +27,15 @@ const CookieStore = MongoStore(session);
 
 app.use(helmet({ contentSecurityPolicy: false }));
 app.set('view engine', 'pug');
-app.set("views", path.join(__dirname, "views"));
+app.set('views', path.join(__dirname, 'views'));
 // use middleware
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded( {extended : true} ));
 app.use(morgan('dev'));
 app.use('/uploads', express.static('uploads'));
-app.use('/static', express.static('static')); // /static 라우트 요청이 올 때 static 디렉토리 참조
+app.use('/static', express.static(path.join(__dirname, 'static')));
+// app.use('/static', express.static('static')); // /static 라우트 요청이 올 때 static 디렉토리 참조
 
 app.use(session({
   secret: process.env.COOKIE_SECRET,
