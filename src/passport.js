@@ -10,7 +10,10 @@ passport.use(
   new GithubStrategy({
     clientID: process.env.GH_ID,
     clientSecret: process.env.GH_SECRET,
-    callbackURL: `http://localhost:9090${routes.github_callback}`,
+    // callbackURL: `http://localhost:9090${routes.github_callback}`,
+    callbackURL: process.env.PRODUCTION
+      ? `https://boiling-plains-40691.herokuapp.com${routes.github_callback}`
+      : `http://localhost:9090${routes.github_callback}`,
   }, githubLoginCallback)
 );
 
