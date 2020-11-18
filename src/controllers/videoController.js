@@ -42,10 +42,12 @@ export const postUpload = async (req, res) => {
       description,
       creator : req.user.id
     });
+    req.flash('success', '업로드 완료!');
     req.user.videos.push(newVideo.id);
     req.user.save();
     res.redirect(routes.videoDetail(newVideo.id)); // <- 해당 업로드된 비디오 디테일 페이지로
   } catch (error) {
+    req.flash('error', '업로드 실패..');
     console.log(error);
   }
 };
@@ -86,8 +88,10 @@ export const postEditVideo = async (req, res) => {
   } = req;
   try {
     await Video.findOneAndUpdate({ _id : id }, { title, description });
+    req.flash('success', '수정 완료!');
     res.redirect(routes.videoDetail(id));
   } catch (error) {
+    req.flash('error', '실패! 다시 시도해주세요.');
     res.redirect(routes.home);
   }
 };
@@ -101,9 +105,11 @@ export const deleteVideo = async (req, res) => {
       throw Error();
     } else {
       await Video.findByIdAndDelete({ _id : id });
+      req.flash('success', '삭제 완료!');
       res.redirect(routes.home);
     }
   } catch (error) {
+    req.flash('error', '삭제를 실패했습니다. 다시 시도해주세요.');
     res.redirect(routes.home);
   }
 };
@@ -115,7 +121,7 @@ export const postRegisterView = async(req, res) => {
   try {
     const video = await Video.findById(id);
     video.views += 1;
-    video.save();
+    await video.save();
     res.status(200);
   } catch (error) {
     res.status(400);

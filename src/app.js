@@ -10,6 +10,7 @@ import mongoose from 'mongoose';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import path from 'path';
+import flash from 'express-flash';
 
 import './passport';
 import { localsMiddleware } from './middlewares';
@@ -44,6 +45,7 @@ app.use(session({
   store: new CookieStore({mongooseConnection : mongoose.connection}), // 몽고디비에 세션 저장
 })
 );
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 // 템플릿에 변수를 전달하기 위한 미들웨어.. local을 활용해 변수 접근

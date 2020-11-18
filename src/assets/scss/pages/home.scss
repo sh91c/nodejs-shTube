@@ -1,9 +1,9 @@
 .home-videos {
   margin-top: 50px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(360px, 1fr));
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
   grid-gap: 30px;
     .videoBlcok{
-      grid-column: 3;
+      grid-column: 4;
     }
 }

@@ -15,9 +15,9 @@ block content
             a(href=`${routes.editVideo(video.id)}`)
               button 수 정
       if video.views === 1
-        span.video__views 1 view
+        span.video__views 조회수 1회
       else
-        span.video__views #{video.views+1} views
+        span.video__views 조회수 #{video.views+1}회
           .video__author
             |Uploaded by 
             a(href=routes.userDetail(video.creator.id))=video.creator.name

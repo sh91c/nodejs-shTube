@@ -57,3 +57,8 @@ button,
 input[type="submit"] {
   cursor: pointer;
 }
+
+.flash-error{
+  text-align: center;
+  color: $red;
+}
